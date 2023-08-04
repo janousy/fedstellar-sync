@@ -3,6 +3,7 @@ import logging
 import torch
 import numpy as np
 from fedstellar.learning.aggregators.aggregator import Aggregator
+from fedstellar.learning.modelmetrics import ModelMetrics
 
 
 class TrimmedMean(Aggregator):
@@ -82,7 +83,8 @@ class TrimmedMean(Aggregator):
         models_params = [m for m, _ in models]
 
         # Total Samples
-        total_samples = sum([y for _, y in models])
+        y: ModelMetrics
+        total_samples = sum([y.num_samples for _, y in models])
         total_models = len(models)
 
         # Create a Zero Model

@@ -40,7 +40,7 @@ class MNISTDataset(Dataset):
             sub_id=0,
             number_sub=1,
             batch_size=32,
-            num_workers=4,
+            num_workers=2,
             val_percent=0.1,
             iid=True,
     ):

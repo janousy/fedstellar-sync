@@ -2,45 +2,69 @@
 # This file is part of the Fedstellar platform (see https://github.com/enriquetomasmb/fedstellar).
 # Copyright (c) 2023 Enrique Tomás Martínez Beltrán.
 #
+import copy
 import json
 import logging
-import math
 import os
 import pickle
 from datetime import datetime, timedelta
+from typing import List, OrderedDict
 
+from fedstellar.learning.aggregators.helper import cosine_similarity
+from fedstellar.learning.aggregators.pseudo import PseudoAggregator
+from fedstellar.learning.aggregators.sentinel import Sentinel
+from fedstellar.learning.aggregators.sentinelglobal import SentinelGlobal
+from fedstellar.learning.modelmetrics import ModelMetrics
 from fedstellar.learning.pytorch.remotelogger import FedstellarWBLogger
 from fedstellar.learning.pytorch.statisticslogger import FedstellarLogger
-
-os.environ['WANDB_SILENT'] = 'true'
 
 # Import the requests module
 import requests
 
-logging.getLogger("requests").setLevel(logging.WARNING)
-logging.getLogger("urllib3").setLevel(logging.WARNING)
-logging.getLogger("fsspec").setLevel(logging.WARNING)
-
 import random
 import threading
 import time
+import code
+import traceback
+import signal
 
-from lightning.pytorch.loggers import WandbLogger, CSVLogger
-
+from pytorch_lightning.loggers import CSVLogger
 from fedstellar.base_node import BaseNode
 from fedstellar.communication_protocol import CommunicationProtocol
 from fedstellar.config.config import Config
 from fedstellar.learning.aggregators.fedavg import FedAvg
 from fedstellar.learning.aggregators.krum import Krum
-from fedstellar.learning.aggregators.median import Median
 from fedstellar.learning.aggregators.trimmedmean import TrimmedMean
+from fedstellar.learning.aggregators.fltrust import FlTrust
+from fedstellar.learning.aggregators.median import Median
 from fedstellar.learning.exceptions import DecodingParamsError, ModelNotMatchingError
 from fedstellar.learning.pytorch.lightninglearner import LightningLearner
 from fedstellar.role import Role
 from fedstellar.utils.observer import Events, Observer
-
 from fedstellar.attacks.poisoning.modelpoison import modelpoison
 
+logging.getLogger("requests").setLevel(logging.WARNING)
+logging.getLogger("urllib3").setLevel(logging.WARNING)
+logging.getLogger("fsspec").setLevel(logging.WARNING)
+
+os.environ['WANDB_SILENT'] = 'true'
+
+"""
+def debug(sig, frame):
+    # Interrupt running process, and provide a python prompt for interactive debugging.
+    d = {'_frame': frame}  # Allow access to frame object.
+    d.update(frame.f_globals)  # Unless shadowed by global
+    d.update(frame.f_locals)
+
+    i = code.InteractiveConsole(d)
+    message = "Signal received : entering python shell.\nTraceback:\n"
+    message += ''.join(traceback.format_stack(frame))
+    i.interact(message)
+"""
+"""
+def listen():
+    signal.signal(signal.SIGUSR1, debug)  # Register handler
+"""
 
 class Node(BaseNode):
     """
@@ -84,6 +108,8 @@ class Node(BaseNode):
             poisoned_ratio=0,
             noise_type='gaussian',
     ):
+        # listen()
+
         # Super init
         BaseNode.__init__(self, experiment_name, hostdemo, host, port, encrypt, config)
         Observer.__init__(self)
@@ -94,7 +120,7 @@ class Node(BaseNode):
         # Import configuration file
         self.config = config
         # Report the configuration to the controller (first instance)
-        self.__report_status_to_controller()
+        # self.__report_status_to_controller()
 
         # Learning
         self.round = None
@@ -116,11 +142,18 @@ class Node(BaseNode):
         if self.config.participant['tracking_args']['enable_remote_tracking']:
             logging.info("[NODE] Tracking W&B enabled")
             logging.getLogger("wandb").setLevel(logging.ERROR)
+            wandb_project = self.config.participant['tracking_args']['wandb_project']
             if self.hostdemo:
-                wandblogger = FedstellarWBLogger(project="platform-enrique", group=self.experiment_name, name=f"participant_{self.idx}")
+                wandblogger = FedstellarWBLogger(project=wandb_project,
+                                                 group=self.experiment_name,
+                                                 name=f"participant_{self.idx}",
+                                                 config=self.config.participant)
             else:
-                wandblogger = FedstellarWBLogger(project="platform-enrique", group=self.experiment_name, name=f"participant_{self.idx}")
-            wandblogger.watch(model, log="all")
+                wandblogger = FedstellarWBLogger(project=wandb_project,
+                                                 group=self.experiment_name,
+                                                 name=f"participant_{self.idx}",
+                                                 config=self.config.participant)
+            # wandblogger.watch(model, log="all")
             self.learner = learner(model, data, config=self.config, logger=wandblogger)
         else:
             if self.config.participant['tracking_args']['local_tracking'] == 'csv':
@@ -129,24 +162,52 @@ class Node(BaseNode):
                 self.learner = learner(model, data, config=self.config, logger=csvlogger)
             elif self.config.participant['tracking_args']['local_tracking'] == 'web':
                 logging.info("[NODE] Tracking Web enabled")
-                tensorboardlogger = FedstellarLogger(f"{self.log_dir}", name="metrics", version=f"participant_{self.idx}", log_graph=True)
+                tensorboardlogger = FedstellarLogger(f"{self.log_dir}", name="metrics",
+                                                     version=f"participant_{self.idx}", log_graph=True)
                 self.learner = learner(model, data, config=self.config, logger=tensorboardlogger)
 
         logging.info("[NODE] Role: " + str(self.config.participant["device_args"]["role"]))
 
         # Aggregator
+        self.shared_trust = False
         if self.config.participant["aggregator_args"]["algorithm"] == "FedAvg":
-            self.aggregator = FedAvg(node_name=self.get_name(), config=self.config)
+            self.aggregator = FedAvg(node_name=self.get_name(),
+                                     config=self.config,)
         elif self.config.participant["aggregator_args"]["algorithm"] == "Krum":
-            self.aggregator = Krum(node_name=self.get_name(), config=self.config)
+            self.aggregator = Krum(node_name=self.get_name(),
+                                   config=self.config)
         elif self.config.participant["aggregator_args"]["algorithm"] == "Median":
-            self.aggregator = Median(node_name=self.get_name(), config=self.config)
+            self.aggregator = Median(node_name=self.get_name(),
+                                     config=self.config)
         elif self.config.participant["aggregator_args"]["algorithm"] == "TrimmedMean":
-            self.aggregator = TrimmedMean(node_name=self.get_name(), config=self.config)
+            self.aggregator = TrimmedMean(node_name=self.get_name(),
+                                          config=self.config,
+                                          beta=1)
+        elif self.config.participant["aggregator_args"]["algorithm"] == "FlTrust":
+            self.aggregator = FlTrust(node_name=self.get_name(),
+                                      config=self.config,
+                                      learner=self.learner)
+        elif self.config.participant["aggregator_args"]["algorithm"] == "Sentinel":
+            self.aggregator = Sentinel(node_name=self.get_name(),
+                                       config=self.config,
+                                       learner=self.learner,
+                                       loss_distance_threshold=config.participant["aggregator_args"]["sentinel_distance_threshold"]
+                                       )
+        elif self.config.participant["aggregator_args"]["algorithm"] == "SentinelGlobal":
+            self.aggregator = SentinelGlobal(node_name=self.get_name(),
+                                             config=self.config,
+                                             learner=self.learner,
+                                             loss_distance_threshold=config.participant["aggregator_args"]["sentinel_distance_threshold"],
+                                             global_trust={},
+                                             active_round=config.participant["aggregator_args"]["sentinelglobal_active_round"],
+                                             )
+            self.shared_trust = True
+        elif self.config.participant["aggregator_args"]["algorithm"] == "Pseudo":
+            self.aggregator = PseudoAggregator(node_name=self.get_name(),
+                                               config=self.config,
+                                               learner=self.learner)
 
         self.aggregator.add_observer(self)
-
-        self.shared_metrics = False
 
         # Store the parameters of the model
         self.__stored_model_parameters = []
@@ -251,7 +312,9 @@ class Node(BaseNode):
             return
         if self.round is None:
             # Start Learning
-            logging.info("[NODE] I am the initializer node... | Broadcasting START_LEARNING | Rounds: {} | Epochs: {}".format(rounds, epochs))
+            logging.info(
+                "[NODE] I am the initializer node... | Broadcasting START_LEARNING | Rounds: {} | Epochs: {}".format(
+                    rounds, epochs))
             self.broadcast(
                 CommunicationProtocol.build_start_learning_msg(rounds, epochs)
             )
@@ -259,7 +322,7 @@ class Node(BaseNode):
             self.broadcast(CommunicationProtocol.build_model_initialized_msg())
             self.__wait_init_model_lock.release()
             self.__model_initialized = (
-                True  # With Locks is enough, but this is more readable
+                True  # esto seguramente sobre, con locks es suficiente
             )
             # Learning Thread
             self.__start_learning_thread(rounds, epochs)
@@ -317,7 +380,10 @@ class Node(BaseNode):
                 self.get_neighbors()
             )  # used to restore the original list of neighbors after the learning round
 
-            logging.info("[NODE.__start_learning] Learning started in node {} -> Round: {} | Epochs: {}".format(self.get_name(), self.round, epochs))
+            logging.info(
+                "[NODE.__start_learning] Learning started in node {} -> Round: {} | Epochs: {}".format(self.get_name(),
+                                                                                                       self.round,
+                                                                                                       epochs))
             self.learner.set_epochs(epochs)
             self.learner.create_trainer()
             self.__train_step()
@@ -331,16 +397,19 @@ class Node(BaseNode):
         # Rounds
         self.round = None
         self.totalrounds = None
-        # Leraner
+        # Learner
         self.learner.interrupt_fit()
         # Aggregator
-        self.aggregator.check_and_run_aggregation(force=True)
+        # TODO sync: force false
+        self.aggregator.check_and_run_aggregation(force=False)
+        # self.aggregator.check_and_run_aggregation(force=True)
         self.aggregator.set_nodes_to_aggregate([])
         self.aggregator.clear()
         # Try to free wait locks
         try:
             self.__wait_votes_ready_lock.release()
-        except threading.ThreadError:
+        except threading.ThreadError as e:
+            # logging.error("{}".format(e), stack_info=True)
             pass
 
     ####################################
@@ -359,19 +428,29 @@ class Node(BaseNode):
             try:
                 if self.__model_initialized:
                     # Add model to aggregator
+                    metrics: ModelMetrics
                     (
                         decoded_model,
                         contributors,
-                        weight,
+                        metrics,
                     ) = self.learner.decode_parameters(m)
-                    logging.info("[NODE.add_model] Model received from {} --using--> {} in the other node | Now I add the model using self.aggregator.add_model()".format(contributors, '__gossip_model_diffusion' if contributors is None and weight is None else '__gossip_model_aggregation'))
+                    logging.info(
+                        "[NODE.add_model] Model received from {} --using--> {} in the other node | Now I add the model using self.aggregator.add_model()".format(
+                            contributors,
+                            '__gossip_model_diffusion' if contributors is None and metrics is None else '__gossip_model_aggregation'))
                     if self.learner.check_parameters(decoded_model):
+
+                        # START CUSTOMIZED
+                        # new_metrics = self.compute_model_metrics(contributors, decoded_model, metrics)
+                        # END CUSTOMIZED
+
                         models_added = self.aggregator.add_model(
-                            decoded_model, contributors, weight
+                            decoded_model, contributors, metrics
                         )
                         if models_added is not None:
-                            logging.info("[NODE.add_model] self.broadcast with MODELS_AGGREGATED = {}".format(models_added))
-                            # TODO: Improve this functionality by a more efficient one.
+                            logging.info(
+                                "[NODE.add_model] self.broadcast with MODELS_AGGREGATED = {}".format(models_added))
+                            # TODO: Fix bug at MacBook. When CPU is high, only new nodes will be sent.
                             self.broadcast(
                                 CommunicationProtocol.build_models_aggregated_msg(
                                     models_added
@@ -419,17 +498,23 @@ class Node(BaseNode):
 
         # Set train set
         if self.round is not None:
+            # self.__train_set = self.__vote_train_set()
             for n in self.get_neighbors():
                 if n.get_name() not in self.__train_set:
                     self.__train_set.append(n.get_name())
             self.__train_set.append(self.get_name()) if self.get_name() not in self.__train_set else None
+            # if self.config.participant["device_args"]["role"] != Role.TRAINER:
+            #     self.__train_set.append(self.get_name()) if self.get_name() not in self.__train_set else None
+            # else:
+            #     self.__train_set.remove(self.get_name()) if self.get_name() in self.__train_set else None
             logging.info("[NODE.__train_step] __train_set = {}".format(self.__train_set))
             self.__validate_train_set()
 
         # TODO: Improve in the future
         # is_train_set = self.get_name() in self.__train_set
         is_train_set = True
-        if is_train_set and (self.config.participant["device_args"]["role"] == Role.AGGREGATOR or self.config.participant["device_args"]["role"] == Role.SERVER):
+        if is_train_set and (self.config.participant["device_args"]["role"] == Role.AGGREGATOR or
+                             self.config.participant["device_args"]["role"] == Role.SERVER):
             logging.info("[NODE.__train_step] Role.AGGREGATOR/Role.SERVER process...")
             # Full connect train set
             if self.round is not None:
@@ -440,16 +525,27 @@ class Node(BaseNode):
                 self.__evaluate()
 
             # Train
-            if self.round is not None and self.config.participant["device_args"]["role"] != Role.SERVER:  # El participante servidor no entrena (en CFL)
+            if self.round is not None and self.config.participant["device_args"][
+                "role"] != Role.SERVER:  # El participante servidor no entrena (en CFL)
                 self.__train()
 
             # Aggregate Model
             if self.round is not None:
                 logging.info("[NODE.__train_step] self.aggregator.add_model with MY MODEL")
+
+                """
+                my_model = self.learner.get_parameters()
+                my_metrics = self.compute_model_metrics(contributors=[self.get_name()],
+                                                        model_params=my_model,
+                                                       current_metrics=ModelMetrics())
+                """
+                metrics = ModelMetrics()
+                metrics.num_samples = self.learner.get_num_samples()[0]
+
                 self.aggregator.add_model(
                     self.learner.get_parameters(),
                     [self.get_name()],
-                    self.learner.get_num_samples()[0],
+                    metrics=metrics
                 )
                 logging.info("[NODE.__train_step] self.broadcast with MODELS_AGGREGATED = MY_NAME")
                 self.broadcast(
@@ -462,12 +558,14 @@ class Node(BaseNode):
 
         elif self.config.participant["device_args"]["role"] == Role.TRAINER:
             logging.info("[NODE.__train_step] Role.TRAINER process...")
-            logging.info("[NODE.__train_step] __waiting_aggregated_model = {}".format(self.aggregator.get_waiting_aggregated_model()))
+            logging.info("[NODE.__train_step] __waiting_aggregated_model = {}".format(
+                self.aggregator.get_waiting_aggregated_model()))
             if self.round is not None:
                 self.__connect_and_set_aggregator()
 
             # Evaluate and send metrics
             if self.round is not None:
+                logging.info("[NODE.__evaluate_step] Evaluating the local model")
                 self.__evaluate()
 
             # Train
@@ -478,10 +576,18 @@ class Node(BaseNode):
             if self.round is not None:
                 logging.info("[NODE.__train_step] self.aggregator.add_model with MY MODEL")
                 # Node has to aggregate its own model before sending it to the aggregator
+                """
+                my_model = self.learner.get_parameters()
+                my_metrics = self.compute_model_metrics(contributors=[self.get_name()],
+                                                        model_params=my_model,
+                                                        current_metrics=ModelMetrics())
+                """
+                my_metrics = ModelMetrics()
+                my_metrics.num_samples = self.learner.get_num_samples()[0]
                 self.aggregator.add_model(
                     self.learner.get_parameters(),
                     [self.get_name()],
-                    self.learner.get_num_samples()[0],
+                    metrics=my_metrics
                 )
 
                 logging.info("[NODE.__train_step] self.broadcast with MODELS_AGGREGATED = MY_NAME")
@@ -559,40 +665,45 @@ class Node(BaseNode):
     def __connect_and_set_aggregator(self):
         # Set Models To Aggregate
         self.aggregator.set_nodes_to_aggregate(self.__train_set)
-        logging.info("[NODE.__connect_and_set_aggregator] Aggregator set to: {}".format(self.__train_set))
-        # for node in self.__train_set:
-        #     if node != self.get_name():
-        #         h, p = node.split(":")
-        #         if p.isdigit():
-        #             nc = self.get_neighbor(h, int(p))
-        #             # If the node is not connected, connect it (to avoid duplicated connections only a node connects to the other)
-        #             if nc is None and self.get_name() > node:
-        #                 self.connect_to(h, int(p), force=True)
-        #         else:
-        #             logging.info(
-        #                 "[NODE] Node {} has an invalid port".format(
-        #                     node.split(":")
-        #                 )
-        #             )
-        #
-        # # Wait connections
-        # count = 0
-        # begin = time.time()
-        # while True:
-        #     count = count + (time.time() - begin)
-        #     if count > self.config.participant["TRAIN_SET_CONNECT_TIMEOUT"]:
-        #         logging.info("[NODE] Timeout for train set connections.")
-        #         break
-        #     if (len(self.__train_set) == len(
-        #             [
-        #                 nc
-        #                 for nc in self.get_neighbors()
-        #                 if nc.get_name() in self.__train_set
-        #             ]
-        #     ) + 1
-        #     ):
-        #         break
-        #     time.sleep(0.1)
+        # TODO merge uncertainty
+        logging.info("[NODE.__connect_and_set_aggregator] Aggregator set to train_set: {}".format(self.__train_set))
+        for node in self.__train_set:
+            if node != self.get_name():
+                h, p = node.split(":")
+                if p.isdigit():
+                    nc = self.get_neighbor(h, int(p))
+                    # If the node is not connected, connect it (to avoid duplicated connections only a node connects to the other)
+                    if nc is None and self.get_name() > node:
+                        self.connect_to(h, int(p), force=True)
+                else:
+                    logging.info(
+                        "[NODE] Node {} has an invalid port".format(
+                            node.split(":")
+                        )
+                    )
+
+        # Wait connections
+        count = 0
+        begin = time.time()
+        while True:
+            count = count + (time.time() - begin)
+            # TODO sync: wait for all nodes to connect
+            """
+            if count > self.config.participant["TRAIN_SET_CONNECT_TIMEOUT"]:
+                logging.info("[NODE] Timeout for train set connections.")
+                break
+            """
+            logging.info("[NODE.__connect_and_set_aggregator] Waiting for node connections.")
+            if (len(self.__train_set) == len(
+                    [
+                        nc
+                        for nc in self.get_neighbors()
+                        if nc.get_name() in self.__train_set
+                    ]
+            ) + 1
+            ):
+                break
+            time.sleep(0.1)
 
     ############################
     #    Train and Evaluate    #
@@ -600,23 +711,29 @@ class Node(BaseNode):
 
     def __train(self):
         logging.info("[NODE.__train] Start training...")
-        print("[NODE.__train] Start training...")
         self.learner.fit()
         logging.info("[NODE.__train] Finish training...")
-        print("[NODE.__train] Finish training...")
         # model poison ###
         if self.model_poisoning:
             model_param = self.learner.get_parameters()
             poisoned_model_param = modelpoison(model_param, poisoned_ratio=self.poisoned_ratio,
                                                noise_type=self.noise_type)
             self.learner.set_parameters(poisoned_model_param)
+        """
+        results = self.learner.evaluate()
+        if results is not None:
+            logging.warning(
+                "[NODE] Evaluated. Loss: {}, Metric: {}".format(
+                    results[0], results[1]
+                )
+            )
+            logging.info("[NODE.__train] Finish the local evaluation...")
+        """
 
     def __evaluate(self):
         logging.info("[NODE.__evaluate] Start evaluation...")
-        print("[NODE.__evaluate] Start evaluation...")
         self.learner.evaluate()
         logging.info("[NODE.__evaluate] Finish evaluation...")
-        print("[NODE.__evaluate] Finish evaluation...")
         # if results is not None:
         #     logging.info(
         #         "[NODE] Evaluated. Loss: {}, Metric: {}".format(
@@ -641,23 +758,71 @@ class Node(BaseNode):
     ######################
 
     def __on_round_finished(self):
+
+        # TODO sync: wait for all nodes to arrive here before starting next training round
+        # what happens: aggregator notifies local node with AGGREGATION_FINISHED_EVENT
+        # receiving this event, the local node broadcasts build_models_ready_msg
+        # note: cannot recover from any failing node.
+
+        # make sure to broadcast once more just to be safe
+        logging.info("[Node.__on_round_finished] Sending round ready status at round: {}".format(self.round))
+        self.broadcast(CommunicationProtocol.build_models_ready_msg(self.round))
+        time.sleep(5)
+
+        proceed_round = False
+        count = 0
+        while not proceed_round:
+            nc_ready = [nc for nc in self.get_neighbors() if nc.get_model_ready_status() == self.round]
+            logging.info("[Node.__on_round_finished] Waiting for neighbours to proceed to the next round: "
+                         "num_nc_ready: {}/{}, at round: {}".format(len(nc_ready) + 1, len(self.__train_set),
+                                                                    self.round))
+            if len(self.__train_set) == len(nc_ready) + 1:
+                logging.info("[Node.__on_round_finished] All neighbours ready for the next round")
+                proceed_round = True
+            else:
+                count = count + 1
+                # retry
+                # self.broadcast(CommunicationProtocol.build_models_ready_msg(self.round))
+                if count > self.config.participant["ROUND_PROCEED_TIMEOUT"]:
+                    # with increasing node number, e.g. 10, the sync requires quite some time
+                    logging.info("[NODE] ROUND_PROCEED_TIMEOUT reached. Nodes possibly out of sync. Stopping node!")
+                    self.stop()
+                    return
+                time.sleep(5)
+            """
+            else:
+                count = count + 1
+                if count > self.config.participant["ROUND_PROCEED_TIMEOUT"]:
+                    # with increasing node number, e.g. 10, the sync requires quite some time
+                    logging.info("[NODE] ROUND_PROCEED_TIMEOUT reached. Nodes possibly out of sync. Stopping node!")
+                    self.stop()
+                    return
+            """
+
+        time.sleep(5)
+
         # Remove trainset connections
         for nc in self.get_neighbors():
             if nc not in self.__initial_neighbors:
-                self.rm_neighbor(nc)
+                # TODO sync: no need to remove neighbours (reset breaks sync)
+                # logging.info("Removing neighbour: {}".format(nc.get_name()))
+                pass
+                # self.rm_neighbor(nc)
+
         # Set Next Round
         self.aggregator.clear()
         logging.info("[NODE] Finalizing round: {}".format(self.round))
-        self.learner.finalize_round()  # TODO: Improve functionality
+        self.learner.finalize_round()  # TODO: Fix to improve functionality
         self.round = self.round + 1
-        self.learner.logger.log_metrics({"Round": self.round}, step=self.learner.logger.global_step)
+        self.learner.logger.log_metrics({"Round": self.round}, step=0)
         logging.info("[LightningLearner] Starting round: {}".format(self.round))
         # Clear node aggregation
         for nc in self.get_neighbors():
             nc.clear_models_aggregated()
 
         # If the federation is SDFL and the node is the aggregator, the node can transfer the aggregation role to another node
-        if self.config.participant['scenario_args']["federation"] == "SDFL" and self.config.participant["device_args"]["role"] == "aggregator":
+        if self.config.participant['scenario_args']["federation"] == "SDFL" and self.config.participant["device_args"][
+            "role"] == "aggregator":
             self.__transfer_aggregator_role(schema="random")
 
         # Next Step or Finish
@@ -669,13 +834,18 @@ class Node(BaseNode):
         if self.round < self.totalrounds:
             self.__train_step()
         else:
-            logging.debug("[NODE] FL finished | Models aggregated = {}".format([nc.get_models_aggregated() for nc in self.get_neighbors()]))
+            logging.debug("[NODE] FL finished | Models aggregated = {}".format(
+                [nc.get_models_aggregated() for nc in self.get_neighbors()]))
             # At end, all nodes compute metrics
             self.__evaluate()
+
+            self.learner.compute_confusion_matrix(node_name=self.get_name(), backdoor=True)
+            self.learner.compute_confusion_matrix(node_name=self.get_name(), backdoor=False)
+
             # Finish
             # save the final model to file system
-            with open(self.model_name, 'wb') as f:
-                pickle.dump(self.learner.model, f)
+            # with open(self.model_name, 'wb') as f:
+            #    pickle.dump(self.learner.model, f)
             logging.info(
                 "[NODE] FL experiment finished | Round: {} | Total rounds: {} | [!] Both to None".format(
                     self.round, self.totalrounds
@@ -685,11 +855,14 @@ class Node(BaseNode):
             self.totalrounds = None
             self.__model_initialized = False
             # logging.info("[NODE] FL experiment finished | __stop_learning()")
-            # self.__stop_learning()  # TODO: This is a temporal fix to avoid the node to continue training after the FL experiment is finished
+            # self.__stop_learning()  # TODO: 20-12-22 | This is a temporal fix to avoid the node to continue training after the FL experiment is finished
+            time.sleep(10)
+            self.stop()
 
     def __transfer_aggregator_role(self, schema):
         if schema == "random":
-            logging.info("[NODE.__transfer_aggregator_role] Transferring aggregator role using schema {}".format(schema))
+            logging.info(
+                "[NODE.__transfer_aggregator_role] Transferring aggregator role using schema {}".format(schema))
             # Random
             nc = random.choice(self.get_neighbors())
             msg = CommunicationProtocol.build_transfer_leadership_msg()
@@ -706,9 +879,12 @@ class Node(BaseNode):
     def __gossip_model_aggregation(self):
         logging.info("[NODE.__gossip_model_aggregation] Gossiping...")
         # Anonymous functions
-        candidate_condition = lambda nc: nc.get_name() in self.__train_set and len(nc.get_models_aggregated()) < len(self.__train_set)
+        candidate_condition = lambda nc: nc.get_name() in self.__train_set and len(nc.get_models_aggregated()) < len(
+            self.__train_set)
         status_function = lambda nc: (nc.get_name(), len(nc.get_models_aggregated()))
-        model_function = lambda nc: self.aggregator.get_partial_aggregation(nc.get_models_aggregated())
+        # TODO Sync: remove partial aggregation
+        model_function = lambda nc: self.aggregator.get_local_model()
+        # model_function = lambda nc: self.aggregator.get_partial_aggregation(nc.get_models_aggregated())
 
         # Gossip
         self.__gossip_model(candidate_condition, status_function, model_function)
@@ -743,11 +919,12 @@ class Node(BaseNode):
         last_x_status = []
         j = 0
 
+        # TODO sync: maybe sending the model only once is sufficient?
         while True:
             # Get time to calculate frequency
             begin = time.time()
 
-            # If the trainning has been interrupted, stop waiting
+            # If the training has been interrupted, stop waiting
             if self.round is None:
                 logging.info(
                     "[NODE] Stopping model gossip process.")
@@ -758,9 +935,15 @@ class Node(BaseNode):
             logging.info("[NODE.__gossip_model] Neighbors: {}".format(self.get_neighbors()))
             for nc in self.get_neighbors():
                 logging.info("---------------------Feedback about neighbor {}---------------------".format(nc))
-                logging.info("[NODE.__gossip_model] Neighbor: {} | My __train_set: {} | Nc.modelsaggregated: {}".format(nc, self.__train_set, nc.get_models_aggregated()))
-                logging.info("[NODE.__gossip_model] Neighbor: {} | Candidate_condition return: {}".format(nc, candidate_condition(nc)))
-                logging.info("[NODE.__gossip_model] Neighbor: {} | Status_function return: {}".format(nc, status_function(nc)))
+                logging.info(
+                    "[NODE.__gossip_model] Neighbor: {} | My __train_set: {} | Nc.modelsaggregated: {}".format(nc,
+                                                                                                               self.__train_set,
+                                                                                                               nc.get_models_aggregated()))
+                logging.info("[NODE.__gossip_model] Neighbor: {} | Candidate_condition return: {}".format(nc,
+                                                                                                          candidate_condition(
+                                                                                                              nc)))
+                logging.info(
+                    "[NODE.__gossip_model] Neighbor: {} | Status_function return: {}".format(nc, status_function(nc)))
                 logging.info("---------------------End of feedback about neighbor {}---------------------".format(nc))
             logging.info("------------------------------------------------------------------")
 
@@ -791,13 +974,14 @@ class Node(BaseNode):
                     return
 
             # Select a random subset of neighbors
-            samples = min(self.config.participant["GOSSIP_MODELS_PER_ROUND"], len(nei))
-            nei = random.sample(nei, samples)
-            logging.info("[NODE.__gossip_model] Selected a random subset of neighbors (to exclude): {}".format(nei))
+            # TODO sync: disable sampling
+            # samples = min(self.config.participant["GOSSIP_MODELS_PER_ROUND"], len(nei))
+            # nei = random.sample(nei, samples)
+            # logging.info("[NODE.__gossip_model] Selected a random subset of neighbors (to exclude): {}".format(nei))
 
             # Generate and Send Model Partial Aggregations (model, node_contributors)
             for nc in nei:
-                model, contributors, weights = model_function(nc)
+                model, contributors, metrics = model_function(nc)
                 # Send Partial Aggregation
                 if model is not None:
                     logging.info(
@@ -806,10 +990,12 @@ class Node(BaseNode):
                         )
                     )
                     encoded_model = self.learner.encode_parameters(
-                        params=model, contributors=contributors, weight=weights
+                        params=model, contributors=contributors, metrics=metrics
                     )
-                    logging.info("[NODE.__gossip_model] Building params message | Contributors: {}".format(contributors))
-                    encoded_msgs = CommunicationProtocol.build_params_msg(encoded_model, self.config.participant["BLOCK_SIZE"])
+                    logging.info(
+                        "[NODE.__gossip_model] Building params message | Contributors: {}".format(contributors))
+                    encoded_msgs = CommunicationProtocol.build_params_msg(encoded_model,
+                                                                          self.config.participant["BLOCK_SIZE"])
                     logging.info("[NODE.__gossip_model] Sending params message to {}".format(nc))
                     # Send Fragments
                     for msg in encoded_msgs:
@@ -817,10 +1003,16 @@ class Node(BaseNode):
                 else:
                     logging.info("[NODE.__gossip_model] Model returned by model_function is None")
             # Wait to guarantee the frequency of gossipping
+
+            # TODO sync: maybe this is the problem for the high msg frequency
+            # introducing a simple break here would be interesting
+            return
+            """
             time_diff = time.time() - begin
             time_sleep = 1 / self.config.participant["GOSSIP_MODELS_FREC"] - time_diff
             if time_sleep > 0:
                 time.sleep(time_sleep)
+            """
 
     ###########################
     #     Observer Events     #
@@ -835,9 +1027,11 @@ class Node(BaseNode):
             obj: Object that has been updated.
         """
         if len(str(obj)) > 300:
-            logging.debug("[NODE.update (observer)] Event that has occurred: {} | Obj information: Too long [...]".format(event))
+            logging.debug(
+                "[NODE.update (observer)] Event that has occurred: {} | Obj information: Too long [...]".format(event))
         else:
-            logging.debug("[NODE.update (observer)] Event that has occurred: {} | Obj information: {}".format(event, obj))
+            logging.debug(
+                "[NODE.update (observer)] Event that has occurred: {} | Obj information: {}".format(event, obj))
 
         if event == Events.NODE_CONNECTED_EVENT:
             n, force = obj
@@ -849,7 +1043,8 @@ class Node(BaseNode):
                 return
 
         elif event == Events.SEND_ROLE_EVENT:
-            self.broadcast(CommunicationProtocol.build_role_msg(self.get_name(), self.config.participant["device_args"]["role"]))
+            self.broadcast(
+                CommunicationProtocol.build_role_msg(self.get_name(), self.config.participant["device_args"]["role"]))
 
         elif event == Events.ROLE_RECEIVED_EVENT:
             # Update the heartbeater with the role node
@@ -867,12 +1062,14 @@ class Node(BaseNode):
                 logging.error(
                     "[NODE] Aggregation finished with no parameters"
                 )
+                # TODO: Testing 20-12-2022 (remove stop and add broadcast)
                 # self.stop()
-                # self.broadcast(CommunicationProtocol.build_models_ready_msg(self.round))
+                self.broadcast(CommunicationProtocol.build_models_ready_msg(self.round))
             try:
                 self.__finish_aggregation_lock.release()
                 logging.info("[NODE.__finish_aggregation_lock] __finish_aggregation_lock.release()")
-            except threading.ThreadError:
+            except threading.ThreadError as e:
+                # logging.error("{}".format(e), stack_info=True)
                 pass
 
         elif event == Events.START_LEARNING_EVENT:
@@ -898,13 +1095,16 @@ class Node(BaseNode):
             # Communicate to the training process that a vote has been received
             try:
                 self.__wait_votes_ready_lock.release()
-            except threading.ThreadError:
+            except threading.ThreadError as e:
+                # logging.error("{}".format(e), stack_info=True)
                 pass
 
         elif event == Events.REPORT_STATUS_TO_CONTROLLER_EVENT:
-            self.__report_status_to_controller()
+            # self.__report_status_to_controller()
             # self.__report_logs_to_controller()
-            self.__report_resources()
+            # TODO merge uncertainty
+            # self.__report_resources()
+            pass
 
         elif event == Events.STORE_MODEL_PARAMETERS_EVENT:
             if obj is not None:
@@ -920,7 +1120,8 @@ class Node(BaseNode):
             try:
                 self.__finish_aggregation_lock.release()
                 logging.info("[NODE.__finish_aggregation_lock] __finish_aggregation_lock.release()")
-            except threading.ThreadError:
+            except threading.ThreadError as e:
+                # logging.error("{}".format(e), stack_info=True)
                 pass
 
         # Execute BaseNode update
@@ -939,7 +1140,8 @@ class Node(BaseNode):
 
         # Send the POST request if the controller is available
         try:
-            response = requests.post(url, data=json.dumps(self.config.participant), headers={'Content-Type': 'application/json'})
+            response = requests.post(url, data=json.dumps(self.config.participant),
+                                     headers={'Content-Type': 'application/json'})
         except requests.exceptions.ConnectionError:
             logging.error(f'Error connecting to the controller at {url}')
             return
@@ -949,6 +1151,30 @@ class Node(BaseNode):
             logging.error(f'Error received from controller: {response.status_code}')
             logging.error(response.text)
 
+    # def __report_logs_to_controller(self):
+    #     """
+    #     Report node logs to the controller.
+    #
+    #     Returns:
+    #
+    #     """
+    #
+    #     # Set the URL for the POST request
+    #     url = f'http://{self.config.participant["scenario_args"]["controller"]}/scenario/{self.config.participant["scenario_args"]["name"]}/node/{self.config.participant["device_args"]["uid"]}/update/logs'
+    #
+    #     # Send the POST request if the controller is available
+    #     try:
+    #         with open(self.log_filename + ".log", 'r') as f:
+    #             response = requests.post(url, data=f, headers={'Content-Type': 'text/plain'})
+    #     except requests.exceptions.ConnectionError:
+    #         logging.error(f'Error connecting to the controller at {url}')
+    #         return
+    #
+    #     # If endpoint is not available, log the error
+    #     if response.status_code != 200:
+    #         logging.error(f'Error received from controller: {response.status_code}')
+    #         logging.error(response.text)
+
     def __report_resources(self):
         """
         Report node resources to the controller.
@@ -956,7 +1182,8 @@ class Node(BaseNode):
         Returns:
 
         """
-        step = int((datetime.now() - datetime.strptime(self.config.participant["scenario_args"]["start_time"], "%d/%m/%Y %H:%M:%S")).total_seconds())
+        step = int((datetime.now() - datetime.strptime(self.config.participant["scenario_args"]["start_time"],
+                                                       "%d/%m/%Y %H:%M:%S")).total_seconds())
         import sys
         import psutil
         # Gather CPU usage information
@@ -967,6 +1194,7 @@ class Node(BaseNode):
             if sys.platform == "linux":
                 cpu_temp = psutil.sensors_temperatures()['coretemp'][0].current
         except Exception as e:
+            logging.error("{}".format(e), stack_info=True)
             pass
             # logging.error(f'Error getting CPU temperature: {e}')
         # Gather RAM usage information
@@ -986,9 +1214,13 @@ class Node(BaseNode):
 
         # Logging and reporting
         # logging.info(f'Resources: CPU {cpu_percent}%, CPU temp {cpu_temp}C, RAM {ram_percent}%, Disk {disk_percent}%')
-        self.learner.logger.log_metrics({"Resources/CPU_percent": cpu_percent, "Resources/CPU_temp": cpu_temp, "Resources/RAM_percent": ram_percent, "Resources/Disk_percent": disk_percent}, step=step)
+        self.learner.logger.log_metrics(
+            {"Resources/CPU_percent": cpu_percent, "Resources/CPU_temp": cpu_temp, "Resources/RAM_percent": ram_percent,
+             "Resources/Disk_percent": disk_percent}, step=step)
         # logging.info(f'Resources: Bytes sent {bytes_sent}, Bytes recv {bytes_recv}, Packets sent {packets_sent}, Packets recv {packets_recv}')
-        self.learner.logger.log_metrics({"Resources/Bytes_sent": bytes_sent, "Resources/Bytes_recv": bytes_recv, "Resources/Packets_sent": packets_sent, "Resources/Packets_recv": packets_recv}, step=step)
+        self.learner.logger.log_metrics({"Resources/Bytes_sent": bytes_sent, "Resources/Bytes_recv": bytes_recv,
+                                         "Resources/Packets_sent": packets_sent,
+                                         "Resources/Packets_recv": packets_recv}, step=step)
         # logging.info(f'Resources: Uptime {uptime}')
         self.learner.logger.log_metrics({"Resources/Uptime": uptime}, step=step)
 
@@ -1004,10 +1236,17 @@ class Node(BaseNode):
                 gpu_mem = pynvml.nvmlDeviceGetMemoryInfo(handle)
                 gpu_mem_percent = gpu_mem.used / gpu_mem.total * 100
                 # logging.info(f'Resources: GPU-{i} {gpu_percent}%, GPU temp {gpu_temp}C, GPU mem {gpu_mem_percent}%')
-                self.learner.logger.log_metrics({f"Resources/GPU{i}_percent": gpu_percent, f"Resources/GPU{i}_temp": gpu_temp, f"Resources/GPU{i}_mem_percent": gpu_mem_percent}, step=step)
+                self.learner.logger.log_metrics(
+                    {f"Resources/GPU{i}_percent": gpu_percent, f"Resources/GPU{i}_temp": gpu_temp,
+                     f"Resources/GPU{i}_mem_percent": gpu_mem_percent}, step=step)
         except ModuleNotFoundError:
+            logging.info(f'pynvml not found, skipping GPU usage')
             pass
-            # logging.info(f'pynvml not found, skipping GPU usage')
+        """
+        except NVMLError:
+            logging.info(f'pynvml not found, skipping GPU usage.')
+            pass
+        """
 
     def __store_model_parameters(self, obj):
         """
@@ -1027,4 +1266,5 @@ class Node(BaseNode):
         # ) = self.learner.decode_parameters(obj)
         # if self.learner.check_parameters(decoded_model):
         self.__stored_model_parameters += obj
-        logging.info("[NODE.__store_model_parameters (PROXY)] Stored model parameters: {}".format(len(self.__stored_model_parameters)))
+        logging.info("[NODE.__store_model_parameters (PROXY)] Stored model parameters: {}".format(
+            len(self.__stored_model_parameters)))

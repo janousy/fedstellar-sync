@@ -1,0 +1,61 @@
+{
+  "remote_tracking": true,
+  "aggregation": "FlTrust",
+  "scenario_name": "",
+  "scenario_title": "",
+  "scenario_description": "",
+  "config": "../app/config",
+  "logs": "../app/logs",
+  "models": "../app/models",
+  "n_nodes": 2,
+  "matrix": [],
+  "federation": "DFL",
+  "topology": "fully",
+  "simulation": true,
+  "env": null,
+  "webserver": false,
+  "python": "/opt/homebrew/anaconda3/envs/fedstellar/bin/python",
+  "rounds": 3,
+  "epochs": 3,
+  "dataset": "MNIST",
+  "model": "MLP",
+  "accelerator": "cpu",
+  "attack": "No Attack",
+  "targeted": false,
+  "poisoned_node_persent": 0,
+  "poisoned_sample_persent": 0,
+  "poisoned_ratio": 0,
+  "noise_type": "none",
+  "attack_matrix": [
+    [
+      0,
+      "No Attack",
+      0,
+      0
+    ],
+     [
+      0,
+      "No Attack",
+      0,
+      0
+    ],
+     [
+      0,
+      "No Attack",
+      0,
+      0
+    ],
+    [
+      0,
+      "No Attack",
+      0,
+      0
+    ],
+    [
+      0,
+      "No Attack",
+      0,
+      0
+    ]
+  ]
+}

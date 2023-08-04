@@ -2,16 +2,13 @@
 # This file is part of the Fedstellar platform (see https://github.com/enriquetomasmb/fedstellar).
 # Copyright (c) 2023 Chao Feng.
 #
-import os
-import sys
 from math import floor
 
 # To Avoid Crashes with a lot of nodes
 import torch.multiprocessing
 from lightning import LightningDataModule
-from torch.utils.data import DataLoader, Subset, random_split
-from torchvision import transforms
-from torchvision.datasets import FashionMNIST
+from torch.utils.data import DataLoader, random_split, RandomSampler
+
 from fedstellar.learning.pytorch.changeablesubset import ChangeableSubset
 
 torch.multiprocessing.set_sharing_strategy("file_system")
@@ -37,18 +34,17 @@ class DataModule(LightningDataModule):
             sub_id=0,
             number_sub=1,
             batch_size=32,
-            num_workers=4,
+            num_workers=4,  # CPU: 6, GPU (1): 2
             val_percent=0.1,
             label_flipping=False,
             data_poisoning=False,
-            poisoned_persent=0,
+            poisoned_percent=0,
             poisoned_ratio=0,
             targeted=False,
             target_label=0,
             target_changed_label=0,
             noise_type="salt",
             indices_dir=None
-
     ):
         super().__init__()
 
@@ -61,21 +57,26 @@ class DataModule(LightningDataModule):
         self.val_percent = val_percent
         self.label_flipping = label_flipping
         self.data_poisoning = data_poisoning
-        self.poisoned_percent = poisoned_persent
+        self.poisoned_percent = poisoned_percent
         self.poisoned_ratio = poisoned_ratio
         self.targeted = targeted
         self.target_label = target_label
         self.target_changed_label = target_changed_label
-        self.noise_type = noise_type,
+        self.noise_type = noise_type
         self.indices_dir = indices_dir
 
         if self.sub_id + 1 > self.number_sub:
             raise ("Not exist the subset {}".format(self.sub_id))
 
+        print("datamodule: targeted is " + str(targeted))
+
         # Training / validation set
         rows_by_sub = floor(len(train_set) / self.number_sub)
         tr_subset = ChangeableSubset(
-            train_set, range(self.sub_id * rows_by_sub, (self.sub_id + 1) * rows_by_sub), label_flipping=self.label_flipping, data_poisoning=self.data_poisoning, poisoned_persent=self.poisoned_percent, poisoned_ratio=self.poisoned_ratio, targeted=self.targeted, target_label=self.target_label,
+            train_set, range(self.sub_id * rows_by_sub, (self.sub_id + 1) * rows_by_sub),
+            label_flipping=self.label_flipping, data_poisoning=self.data_poisoning,
+            poisoned_percent=self.poisoned_percent, poisoned_ratio=self.poisoned_ratio,
+            targeted=self.targeted, target_label=self.target_label,
             target_changed_label=self.target_changed_label, noise_type=self.noise_type
         )
         data_train, data_val = random_split(
@@ -94,6 +95,21 @@ class DataModule(LightningDataModule):
 
         if len(test_set) < self.number_sub:
             raise "Too much partitions"
+
+        # Save indices to local files
+        train_indices_filename = f"{self.indices_dir}/participant_{self.sub_id}_train_indices.pk"
+        valid_indices_filename = f"{self.indices_dir}/participant_{self.sub_id}_valid_indices.pk"
+        test_indices_filename = f"{self.indices_dir}/participant_{self.sub_id}_test_indices.pk"
+        # Every node should have a dataset with artificial backdoor to evaluate
+        data_backdoor = ChangeableSubset(
+            test_set, range(self.sub_id * rows_by_sub, (self.sub_id + 1) * rows_by_sub),
+            label_flipping=False, data_poisoning=True,
+            poisoned_percent=100,
+            poisoned_ratio=100, targeted=True, target_label=3,
+            target_changed_label=7, noise_type=None, backdoor_validation=True)
+
+        if len(test_set) < self.number_sub:
+            raise "Too many partitions"
 
         # Save indices to local files
         train_indices_filename = f"{self.indices_dir}/participant_{self.sub_id}_train_indices.pk"
@@ -135,11 +151,24 @@ class DataModule(LightningDataModule):
             drop_last=True,
             pin_memory=False,
         )
-        print(
-            "Train: {} Val:{} Test:{}".format(
-                len(data_train), len(data_val), len(te_subset)
-            )
+        self.backdoor_loader = DataLoader(
+            data_backdoor,
+            batch_size=self.batch_size,
+            shuffle=False,
         )
+        random_sampler = RandomSampler(
+            data_source=data_val,
+            replacement=False,
+            num_samples=max(int(len(data_val)/3), 300)
+        )
+        self.bootstrap_loader = DataLoader(
+            data_val,
+            batch_size=self.batch_size,
+            shuffle=False,
+            sampler=random_sampler
+        )
+
+        print(f'Train: {len(data_train)} Val:{len(data_val)} Test:{len(te_subset)}')
 
     def train_dataloader(self):
         """ """
@@ -149,6 +178,18 @@ class DataModule(LightningDataModule):
         """ """
         return self.val_loader
 
+    def bootstrap_dataloader(self):
+        """ """
+        return self.bootstrap_loader
+
     def test_dataloader(self):
         """ """
         return self.test_loader
+
+    def predict_dataloader(self):
+        """ """
+        return self.test_loader
+
+    def backdoor_dataloader(self):
+        """ """
+        return self.backdoor_loader

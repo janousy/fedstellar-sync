@@ -1,0 +1,103 @@
+{
+    "scenario_name": "MNIST_1_MLP_FlTrust_fully_ModelPoisoning_0_N50-S0_R80_salt_20230804_154710",
+    "remote_tracking": true,
+    "logging": true,
+    "wandb_project": "fedstellar",
+    "scenario_title": "DFL_FedAvg_fully_Model Poisoning_2020",
+    "scenario_description": "",
+    "config": "C:\\Users\\janos.LAPTOP-42CLK60G\\Repos\\fedstellar\\app\\config",
+    "logs": "C:\\Users\\janos.LAPTOP-42CLK60G\\Repos\\fedstellar\\app\\logs",
+    "models": "C:\\Users\\janos.LAPTOP-42CLK60G\\Repos\\fedstellar\\app\\models",
+    "n_nodes": 3,
+    "matrix": [],
+    "federation": "DFL",
+    "topology": "fully",
+    "simulation": true,
+    "env": null,
+    "webserver": false,
+    "is_iid": true,
+    "python": "C:\\Users\\janos.LAPTOP-42CLK60G\\Repos\\fedstellar-robust\\.venv\\Scripts\\python",
+    "attack": "Model Poisoning",
+    "targeted": false,
+    "target_label": 3,
+    "target_changed_label": 7,
+    "noise_type": "salt",
+    "poisoned_node_percent": 50,
+    "poisoned_sample_percent": 0,
+    "poisoned_ratio": 80,
+    "sentinel_distance_threshold": 0.1,
+    "rounds": 3,
+    "epochs": 2,
+    "dataset": "MNIST",
+    "model": "MLP",
+    "accelerator": "cpu",
+    "aggregation": "FlTrust",
+    "network_subnet": "192.168.50.1/24",
+    "network_gateway": "192.168.50.1",
+    "webport": "5000",
+    "statsport": "5100",
+    "docker": true,
+    "attack_matrix": [
+        [
+            0,
+            "Label Flipping",
+            1.0,
+            0.8
+        ],
+        [
+            1,
+            "No Attack",
+            0,
+            0
+        ],
+        [
+            2,
+            "No Attack",
+            0,
+            0
+        ],
+        [
+            3,
+            "Label Flipping",
+            1.0,
+            0.8
+        ],
+        [
+            4,
+            "No Attack",
+            0,
+            0
+        ],
+        [
+            5,
+            "No Attack",
+            0,
+            0
+        ],
+        [
+            6,
+            "Label Flipping",
+            1.0,
+            0.8
+        ],
+        [
+            7,
+            "Label Flipping",
+            1.0,
+            0.8
+        ],
+        [
+            8,
+            "Label Flipping",
+            1.0,
+            0.8
+        ],
+        [
+            9,
+            "Label Flipping",
+            1.0,
+            0.8
+        ]
+    ],
+    "sentinelglobal_active_round": 3
+}

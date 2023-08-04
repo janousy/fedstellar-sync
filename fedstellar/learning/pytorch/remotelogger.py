@@ -44,6 +44,7 @@ class FedstellarWBLogger(Logger):
             log_model: Union[str, bool] = False,
             experiment: Union[Run, RunDisabled, None] = None,
             prefix: str = "",
+            config: Optional[Dict[str, str]] = None,
             checkpoint_name: Optional[str] = None,
             **kwargs: Any,
     ) -> None:
@@ -81,6 +82,14 @@ class FedstellarWBLogger(Logger):
         elif dir is not None:
             dir = os.fspath(dir)
 
+        wandb_config = {"data_args": config["data_args"],
+                        "model_args": config["model_args"],
+                        "aggregator_args": config["aggregator_args"],
+                        "adversarial_args": config["adversarial_args"],
+                        "attack_env": config["adversarial_args"]["attack_env"],
+                        "network_args": str(config["network_args"]["ip"]) + ":" + str(config["network_args"]["port"])
+                        }
+
         # set wandb init arguments
         self._wandb_init: Dict[str, Any] = dict(
             name=name,
@@ -89,6 +98,7 @@ class FedstellarWBLogger(Logger):
             id=version or id,
             resume="allow",
             anonymous=("allow" if anonymous else None),
+            config=wandb_config
         )
         self._wandb_init.update(**kwargs)
         # extract parameters

@@ -3,6 +3,7 @@ import logging
 import torch
 import numpy
 from fedstellar.learning.aggregators.aggregator import Aggregator
+from fedstellar.learning.modelmetrics import ModelMetrics
 
 
 class Krum(Aggregator):
@@ -25,6 +26,9 @@ class Krum(Aggregator):
         Args:
             models: Dictionary with the models (node: model,num_samples).
         """
+
+        node_keys = list(models.keys())
+
         # Check if there are models to aggregate
         if len(models) == 0:
             logging.error(
@@ -35,7 +39,8 @@ class Krum(Aggregator):
         models = list(models.values())
 
         # Total Samples
-        total_samples = sum([y for _, y in models])
+        y: ModelMetrics
+        total_samples = sum([y.num_samples for _, y in models])
 
         # Create a Zero Model
         accum = (models[-1][0]).copy()
@@ -78,5 +83,10 @@ class Krum(Aggregator):
         m, _ = models[min_index]
         for layer in m:
             accum[layer] = accum[layer] + m[layer]
+
+        return accum
+
+        # logging.info("[Krum.aggregate] Aggregated model: accum={}".format(accum))
+        logging.info("[Krum.aggregate] Selected model: {}, distance: {}".format(node_keys[min_index], distance_list[min_index]))
 
         return accum

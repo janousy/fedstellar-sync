@@ -14,7 +14,7 @@ from torchmetrics.classification import MulticlassAccuracy, MulticlassRecall, Mu
 from torchmetrics import MetricCollection
 
 
-class CNN(pl.LightningModule):
+class Cifar100ModelCNN(pl.LightningModule):
     """
     LightningModule for CIFAR10.
     """
@@ -87,7 +87,7 @@ class CNN(pl.LightningModule):
                 ax.set_yticks(range(10))
                 ax.xaxis.set_ticklabels([i for i in range(10)])
                 ax.yaxis.set_ticklabels([i for i in range(10)])
-                self.logger.experiment.add_figure(f"{phase}Epoch/CM", ax.get_figure(), global_step=self.epoch_global_number[phase])
+                # self.logger.experiment.add_figure(f"{phase}Epoch/CM", ax.get_figure(), global_step=self.epoch_global_number[phase])
                 plt.close()
 
         # Reset metrics

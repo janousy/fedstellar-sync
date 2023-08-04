@@ -5,10 +5,12 @@
 
 
 import logging
+from typing import Dict
 
 import torch
 
 from fedstellar.learning.aggregators.aggregator import Aggregator
+from fedstellar.learning.modelmetrics import ModelMetrics
 
 
 class FedAvg(Aggregator):
@@ -28,7 +30,7 @@ class FedAvg(Aggregator):
         Ponderated average of the models.
 
         Args:
-            models: Dictionary with the models (node: model,num_samples).
+            models: Dictionary with the models (node: model, metrics).
         """
         # Check if there are models to aggregate
         if len(models) == 0:
@@ -37,10 +39,21 @@ class FedAvg(Aggregator):
             )
             return None
 
+        for node, msg in models.items():
+            params = msg[0]
+            metrics: ModelMetrics = msg[1]
+            logging.info("FedAvg model metrics: {}".format(metrics))
+
         models = list(models.values())
 
         # Total Samples
-        total_samples = sum([y for _, y in models])
+        y: ModelMetrics
+        total_samples = sum([y.num_samples for _, y in models])
+
+        if total_samples == 0:
+            logging.error("FedAvg: Did not receive sample metrics")
+        else:
+            logging.info("[FedAvg.aggregate]: aggregating with {} samples".format(total_samples))
 
         # Create a Zero Model
         accum = (models[-1][0]).copy()
@@ -49,9 +62,10 @@ class FedAvg(Aggregator):
 
         # Add weighteds models
         logging.info("[FedAvg.aggregate] Aggregating models: num={}".format(len(models)))
-        for m, w in models:
-            for layer in m:
-                accum[layer] = accum[layer] + m[layer] * w
+        metrics: ModelMetrics
+        for model, metrics in models:
+            for layer in model:
+                accum[layer] = accum[layer] + model[layer] * metrics.num_samples
 
         # Normalize Accum
         for layer in accum:

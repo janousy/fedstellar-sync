@@ -35,3 +35,4 @@ pandas==1.5.2
 timm==0.6.13
 gunicorn==20.1.0
 nvidia-ml-py==11.525.84
+scikit-image

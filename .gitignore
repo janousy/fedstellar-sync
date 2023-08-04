@@ -130,7 +130,13 @@ dmypy.json
 
 # Own
 *.txt
-.idea/
 _build/
 *.DS_Store
 app/
+.idea/workspace.xml
+.idea/tasks.xml
+fedstellar/data
+wandb/
+*.dat
+*.png
+*.pdf

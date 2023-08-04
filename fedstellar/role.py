@@ -11,7 +11,7 @@
 
 class Role:
     """
-    This class defines the participant roles of the platform.
+    This class defines the participant roles of the framework.
     """
 
     """

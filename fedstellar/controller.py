@@ -3,6 +3,7 @@ import hashlib
 import json
 import logging
 import os
+import shutil
 import re
 import signal
 import subprocess
@@ -266,7 +267,7 @@ class Controller:
 
     def load_configurations_and_start_nodes(self):
         if not self.scenario_name:
-            self.scenario_name = f'fedstellar_{self.federation}_{datetime.now().strftime("%d_%m_%Y_%H_%M_%S")}'
+            self.scenario_name = f'fedstellar_{self.federation}_{self.config}_{datetime.now().strftime("%d_%m_%Y_%H_%M_%S")}'
         # Once the scenario_name is defined, we can update the config_dir
         self.config_dir = os.path.join(self.config_dir, self.scenario_name)
         os.makedirs(self.config_dir, exist_ok=True)
@@ -377,7 +378,11 @@ class Controller:
         participant_template = textwrap.dedent("""
             participant{}:
                 image: fedstellar
-                restart: always
+                labels:
+                    - fedstellar-jb
+                env_file:
+                    - .env
+                restart: "no"
                 volumes:
                     - {}:/fedstellar
                 extra_hosts:
@@ -388,7 +393,7 @@ class Controller:
                     - /bin/bash
                     - -c
                     - |
-                        ifconfig && echo '{} host.docker.internal' >> /etc/hosts && python3.8 /fedstellar/fedstellar/node_start.py {}
+                        ifconfig && echo '{} host.docker.internal' >> /etc/hosts && echo $(hostname -I) $(hostname) >> /etc/hosts && python3.8 /fedstellar/fedstellar/node_start.py {}
                 depends_on:
                     - participant{}
                 networks:
@@ -400,7 +405,11 @@ class Controller:
         participant_template_start = textwrap.dedent("""
             participant{}:
                 image: fedstellar
-                restart: always
+                labels:
+                    - fedstellar-jb
+                env_file:
+                    - .env
+                restart: "no"
                 volumes:
                     - {}:/fedstellar
                 extra_hosts:
@@ -411,7 +420,7 @@ class Controller:
                     - /bin/bash
                     - -c
                     - |
-                        /bin/sleep 60 && ifconfig && echo '{} host.docker.internal' >> /etc/hosts && python3.8 /fedstellar/fedstellar/node_start.py {}
+                        /bin/sleep 60 && ifconfig && echo '{} host.docker.internal' >> /etc/hosts && echo $(hostname -I) $(hostname) >> /etc/hosts && python3.8 /fedstellar/fedstellar/node_start.py {}
                 networks:
                     fedstellar-net:
                         ipv4_address: {}
@@ -421,7 +430,11 @@ class Controller:
         participant_gpu_template = textwrap.dedent("""
             participant{}:
                 image: fedstellar-gpu
-                restart: always
+                labels:
+                    - fedstellar-jb
+                env_file:
+                    - .env
+                restart: "no"
                 volumes:
                     - {}:/fedstellar
                 extra_hosts:
@@ -432,7 +445,7 @@ class Controller:
                     - /bin/bash
                     - -c
                     - |
-                        ifconfig && echo '{} host.docker.internal' >> /etc/hosts && python3.8 /fedstellar/fedstellar/node_start.py {}
+                        ifconfig && echo '{} host.docker.internal' >> /etc/hosts && echo $(hostname -I) $(hostname) >> /etc/hosts && python3.8 /fedstellar/fedstellar/node_start.py {}
                 depends_on:
                     - participant{}
                 deploy:
@@ -451,7 +464,11 @@ class Controller:
         participant_gpu_template_start = textwrap.dedent("""
             participant{}:
                 image: fedstellar-gpu
-                restart: always
+                labels:
+                    - fedstellar-jb
+                env_file:
+                    - .env
+                restart: "no"
                 volumes:
                     - {}:/fedstellar
                 extra_hosts:
@@ -462,7 +479,7 @@ class Controller:
                     - /bin/bash
                     - -c
                     - |
-                        /bin/sleep 60 && ifconfig && echo '{} host.docker.internal' >> /etc/hosts && python3.8 /fedstellar/fedstellar/node_start.py {}
+                        /bin/sleep 60 && ifconfig && echo '{} host.docker.internal' >> /etc/hosts && echo $(hostname -I) $(hostname) >> /etc/hosts && python3.8 /fedstellar/fedstellar/node_start.py {}
                 deploy:
                     resources:
                         reservations:
@@ -480,6 +497,8 @@ class Controller:
             networks:
                 fedstellar-net:
                     driver: bridge
+                    labels:
+                        - fedstellar-jb
                     ipam:
                         config:
                             - subnet: {}
@@ -533,22 +552,21 @@ class Controller:
         with open(f"{self.config_dir}/docker-compose.yml", "w") as f:
             f.write(docker_compose_file)
 
+        env_file_src = os.path.join(os.environ["FEDSTELLAR_ROOT"], ".env")
+        env_file_dest = os.path.join(f"{self.config_dir}", ".env")
+        shutil.copyfile(env_file_src, env_file_dest)
+
         # Change log and config directory in dockers to /fedstellar/app, and change controller endpoint
         for node in self.config.participants:
             node['tracking_args']['log_dir'] = "/fedstellar/app/logs"
             node['tracking_args']['config_dir'] = f"/fedstellar/app/config/{self.scenario_name}"
             node['tracking_args']['model_dir'] = f"/fedstellar/app/models/{self.scenario_name}"
-            # Communication controller-nodes in development mode
-            if self.dev:
-                node['scenario_args']['controller'] = "dev.federatedlearning.inf.um.es"
+            if sys.platform == "linux":
+                node['scenario_args']['controller'] = "host.docker.internal" + ":" + str(self.webserver_port)
+            elif sys.platform == "darwin":
+                node['scenario_args']['controller'] = "host.docker.internal" + ":" + str(self.webserver_port)
             else:
-                # Communication controller-nodes in production mode
-                if sys.platform == "linux":
-                    node['scenario_args']['controller'] = "host.docker.internal" + ":" + str(self.webserver_port)
-                elif sys.platform == "darwin":
-                    node['scenario_args']['controller'] = "host.docker.internal" + ":" + str(self.webserver_port)
-                else:
-                    node['scenario_args']['controller'] = "host.docker.internal" + ":" + str(self.webserver_port)
+                node['scenario_args']['controller'] = "host.docker.internal" + ":" + str(self.webserver_port)
 
             # Write the config file in config directory
             with open(f"{self.config_dir}/participant_{node['device_args']['idx']}.json", "w") as f:

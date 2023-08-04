@@ -6,7 +6,7 @@ import torch
 from skimage.util import random_noise
 
 
-def datapoison(dataset, indices, poisoned_persent, poisoned_ratio, targeted=False, target_label=3, noise_type="salt"):
+def datapoison(dataset, indices, poisoned_percent, poisoned_ratio, targeted=False, target_label=3, noise_type="salt", backdoor_validation=False):
     """
     Function to add random noise of various types to the dataset.
     """
@@ -14,11 +14,9 @@ def datapoison(dataset, indices, poisoned_persent, poisoned_ratio, targeted=Fals
     train_data = new_dataset.data
     targets = new_dataset.targets
     num_indices = len(indices)
-    if type(noise_type) != type("salt"):
-        noise_type = noise_type[0]
 
-    if targeted == False:
-        num_poisoned = int(poisoned_persent * num_indices)
+    if not targeted:
+        num_poisoned = int(poisoned_percent * num_indices)
         if num_indices == 0:
             return new_dataset
         if num_poisoned > num_indices:
@@ -26,7 +24,7 @@ def datapoison(dataset, indices, poisoned_persent, poisoned_ratio, targeted=Fals
         poisoned_indice = random.sample(indices, num_poisoned)
 
         for i in poisoned_indice:
-            t = train_data[i]          
+            t = train_data[i]
             if noise_type == "salt":
                 # Replaces random pixels with 1.
                 poisoned = torch.tensor(random_noise(t, mode=noise_type, amount=poisoned_ratio))
@@ -40,15 +38,25 @@ def datapoison(dataset, indices, poisoned_persent, poisoned_ratio, targeted=Fals
                 # for NLP data, change the word vector to 0 with p=poisoned_ratio
                 poisoned = poison_to_nlp_rawdata(t, poisoned_ratio)
             else:
-                print("ERROR: poison attack type not supported.")
+                print("ERROR: @datapoisoning: poison attack type not supported.")
                 poisoned = t
             train_data[i] = poisoned
     else:
-        for i in indices:
-            if int(targets[i]) == int(target_label):
+        if backdoor_validation:
+            # mark all instances for testing
+            print("Datapoisoning: generating watermarked samples for testing (all classes)")
+            for i in indices:
                 t = train_data[i]
                 poisoned = add_x_to_image(t)
                 train_data[i] = poisoned
+        else:
+            # only mark samples from specific target for training
+            print("Datapoisoning: generating watermarked samples for training, target: " + str(target_label))
+            for i in indices:
+                if int(targets[i]) == int(target_label):
+                    t = train_data[i]
+                    poisoned = add_x_to_image(t)
+                    train_data[i] = poisoned
     new_dataset.data = train_data
     return new_dataset
 
@@ -57,11 +65,11 @@ def add_x_to_image(img):
     """
     Add a 10*10 pixels X at the top-left of a image
     """
-    for i in range(0, 10):
-        for j in range(0, 10):
-            if i + j <= 9 or i == j:
-                img[i][j] = 255
-    return torch.tensor(img)
+    size = 5
+    for i in range(0, size):
+        img[i][i] = 255
+        img[i][size - i - 1] = 255
+    return torch.tensor(img).clone().detach()
 
 
 def poison_to_nlp_rawdata(text_data, poisoned_ratio):
