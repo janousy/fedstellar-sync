@@ -14,6 +14,8 @@
   </p>
 </p>
 
+This repository is a fork of Fedstellar: https://github.com/enriquetomasmb/fedstellar.
+
 ## Adaptions
 The initial Fedstellar platform has been adapted to a synchronous version for more comparable experiments under poisoning attacks. 
 For the synchronized version of Fedstellar, a number of adaptions have been implemented. 
