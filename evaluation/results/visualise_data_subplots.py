@@ -4,7 +4,7 @@ import matplotlib
 # matplotlib.use('Agg')
 import numpy as np
 import dataframe_image as dfi
-from attacks import helper
+import helper
 import os
 import imgkit
 from pathlib import Path
@@ -146,10 +146,10 @@ def generate_plot(_dataset: str, _attack: str, _agg_error):
 
 def main():
     datasets = ["fmnist", "mnist", "cifar10"]
-    # datasets = ["fmnist"]
+    # datasets = ["mnist"]
     attack_names = ["label_flipping_targeted", "label_flipping_untargeted", "sample_poison", "model_poison"]
     # attack_names = ["sample_poison", "model_poison"]
-    # attack_names = ["model_poison"]
+    # attack_names = ["label_flipping_targeted"]
     for dataset in datasets:
         for attack_name in attack_names:
             generate_plot(_dataset=dataset, _attack=attack_name, _agg_error='sem')

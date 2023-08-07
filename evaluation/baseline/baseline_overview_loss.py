@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import dataframe_image as dfi
-from attacks import helper
+from results import helper
 import os
 from pathlib import Path
 from scripts import css_helper

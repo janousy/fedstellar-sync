@@ -154,6 +154,9 @@ def run(project, attack, metric):
         get_metrics_plot(t_entity, t_project, run_filter, t_attack_name, t_metric_name, t_metric_label)
 
 if __name__ == '__main__':
+    # This analysis involves a large amount of data,
+    # hence this script only downloads required data from WandB.
+    # Available metric names can be found in the WandB UI.
 
     projects = [
         "metrics_fmnist",

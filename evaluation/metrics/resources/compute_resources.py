@@ -71,10 +71,12 @@ def plot_compute_metrics(entity, project, psr, pnr, SAVE_PATH, CSV_SAVE_PATH, fi
 
     compute_metrics = compute_metrics.sort_index()
     compute_metrics.to_csv(os.path.join(CSV_SAVE_PATH, f'compute_metrics_{project}.csv'))
+    compute_metrics_range.to_csv(os.path.join(CSV_SAVE_PATH, f'compute_metrics_range_{project}.csv'))
     """
     compute_metrics = pd.read_csv(os.path.join(CSV_SAVE_PATH, f'compute_metrics_{project}.csv'), index_col=0)
+    compute_metrics_range = pd.read_csv(os.path.join(CSV_SAVE_PATH, f'compute_metrics_range_{project}.csv'), index_col=0)
 
-    # if "fmnist" in project:
+# if "fmnist" in project:
     proc_lower = 34
     proc_upper = 42
     ram_lower = 950

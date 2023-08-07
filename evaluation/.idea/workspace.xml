@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0cc7390e-72a5-44b2-8c7c-3ba5b19a254a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/evaluation.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-cifar10-baseline.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-cifar10-lf-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-cifar10-lf-untargeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-cifar10-mp.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-cifar10-sp-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-fashionmnist-baseline.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-fashionmnist-lf-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-fashionmnist-lf-untargeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-fashionmnist-mp.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-fashionmnist-sp-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-mnist-baseline.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-mnist-lf-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-mnist-lf-untargeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-mnist-mp.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/csv/compute_metrics_range_fedstellar-mnist-sp-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-cifar10-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-cifar10-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-cifar10-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-cifar10-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-cifar10-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-fashionmnist-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-fashionmnist-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-fashionmnist-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-fashionmnist-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-fashionmnist-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-mnist-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-mnist-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-mnist-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-mnist-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/compute_metrics_fedstellar-mnist-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-cifar10-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-cifar10-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-cifar10-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-cifar10-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-cifar10-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-fashionmnist-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-fashionmnist-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-fashionmnist-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-fashionmnist-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-fashionmnist-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-mnist-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-mnist-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-mnist-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-mnist-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/fedstellar-mnist-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-cifar10-baseline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-cifar10-lf-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-cifar10-lf-untargeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-cifar10-mp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-cifar10-sp-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-fashionmnist-baseline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-fashionmnist-lf-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-fashionmnist-lf-untargeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-fashionmnist-mp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-fashionmnist-sp-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-mnist-baseline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-mnist-lf-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-mnist-lf-untargeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-mnist-mp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/resources/figures/png/compute_metrics_fedstellar-mnist-sp-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/sentinel_threshold/figures/sentinel_threshold_label_flipping_targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/sentinel_threshold/figures/sentinel_threshold_label_flipping_untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/sentinel_threshold/figures/sentinel_threshold_model_poisoning.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/sentinel_threshold/figures/sentinel_threshold_sample_poisoning.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/data/mnist/label_flipping_targeted/wandb_export_2023-08-07_mnist_lf_targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_targeted/cifar10_label_flipping_targeted_Test_ASR_targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_targeted/cifar10_label_flipping_targeted_Test_ASR_targeted_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_targeted/fmnist_label_flipping_targeted_Test_ASR_targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_targeted/fmnist_label_flipping_targeted_Test_ASR_targeted_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_targeted/mnist_label_flipping_targeted_Test_ASR_targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_targeted/mnist_label_flipping_targeted_Test_ASR_targeted_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_untargeted/cifar10_label_flipping_untargeted_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_untargeted/cifar10_label_flipping_untargeted_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_untargeted/fmnist_label_flipping_untargeted_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_untargeted/fmnist_label_flipping_untargeted_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_untargeted/mnist_label_flipping_untargeted_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/label_flipping_untargeted/mnist_label_flipping_untargeted_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/model_poison/cifar10_model_poison_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/model_poison/cifar10_model_poison_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/model_poison/fmnist_model_poison_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/model_poison/fmnist_model_poison_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/model_poison/mnist_model_poison_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/model_poison/mnist_model_poison_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/sample_poison/cifar10_sample_poison_Test_ASR_backdoor.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/sample_poison/cifar10_sample_poison_Test_ASR_backdoor_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/sample_poison/fmnist_sample_poison_Test_ASR_backdoor.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/sample_poison/fmnist_sample_poison_Test_ASR_backdoor_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/sample_poison/mnist_sample_poison_Test_ASR_backdoor.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/figures/sample_poison/mnist_sample_poison_Test_ASR_backdoor_overview.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/baseline_overview_f1.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/baseline_overview_f1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/baseline_overview_loss.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/baseline_overview_loss.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics/resources/compute_resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/resources/compute_resources.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics/sentinel/metric_analysis_sentinel.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/sentinel/metric_analysis_sentinel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics/sentinel_threshold/sentinel_threshold.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/sentinel_threshold/sentinel_threshold.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics/sentinelglobal/sentinelglobal_numeval.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/sentinelglobal/sentinelglobal_numeval.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/data/mnist/label_flipping_targeted/archive/wandb_export_2023-06-28_mnist_lf_untargeted.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/data/mnist/label_flipping_targeted/wandb_export_2023-07-12_mnist_lf_targeted.csv" beforeDir="false" afterPath="$PROJECT_DIR$/results/data/mnist/label_flipping_targeted/archive/wandb_export_2023-07-12_mnist_lf_targeted.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/visualise_data_subplots.py" beforeDir="false" afterPath="$PROJECT_DIR$/results/visualise_data_subplots.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2TeZ0V7DFMDpFea5C43Q9kG6JkC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  }
+}]]></component>
+  <component name="RunManager" selected="Python.sentinelglobal_trust">
+    <configuration name="compute_resources" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="evaluation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/metrics/resources" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/metrics/resources/compute_resources.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="metric_analysis_sentinel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="evaluation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/metrics/sentinel" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/metrics/sentinel/metric_analysis_sentinel.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sentinel_threshold" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="evaluation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/metrics/sentinel_threshold" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/metrics/sentinel_threshold/sentinel_threshold.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sentinelglobal_numeval" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="evaluation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/metrics/sentinelglobal" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/metrics/sentinelglobal/sentinelglobal_numeval.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sentinelglobal_trust" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="evaluation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/metrics/sentinelglobal" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/metrics/sentinelglobal/sentinelglobal_trust.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.sentinelglobal_trust" />
+        <item itemvalue="Python.sentinelglobal_numeval" />
+        <item itemvalue="Python.sentinel_threshold" />
+        <item itemvalue="Python.metric_analysis_sentinel" />
+        <item itemvalue="Python.compute_resources" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/metrics/resources/compute_resources.py</url>
+          <line>95</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

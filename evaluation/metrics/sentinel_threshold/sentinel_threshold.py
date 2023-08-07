@@ -104,10 +104,8 @@ if __name__ == '__main__':
     if not os.path.exists(SAVE_PATH): os.makedirs(SAVE_PATH)
 
     # Use if not yet downloaded from wandb
-
-    for project in projects:
-        download_threshold_stats(project, attack_list, thresholds)
-
+    # for project in projects:
+    #     download_threshold_stats(project, attack_list, thresholds)
     for attack in attack_list:
         plot_attack_threshold(attack, projects, thresholds, save_path=SAVE_PATH)
     print("Figures saved to: " + SAVE_PATH)

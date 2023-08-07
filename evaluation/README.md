@@ -18,4 +18,4 @@ Recommended python version: 3.10.x
 
 To retrieve the data from the WandB API, an account is recommended. The API key can be found in the settings of the account.
 Alternatively, any random key of length 46 can be used to retrieve data from the public projects. Further information
-can be retrieved from the [Documentation](https://docs.wandb.ai/)
+can be retrieved from the [Documentation](https://docs.wandb.ai/).

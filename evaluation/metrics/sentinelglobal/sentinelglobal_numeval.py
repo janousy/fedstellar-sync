@@ -53,6 +53,7 @@ pv_unstkd_lv = pv_unstkd.droplevel(0, axis=1)
 pv_unstkd_lv_style= pv_unstkd_lv.style.format(precision=0)
 styles = css_helper.get_table_styles()
 pv_unstkd_lv_style = pv_unstkd_lv_style.set_table_styles(styles)
+if not os.path.exists('figures'): os.makedirs('figures')
 file = "figures/sentinelglobal_numeval.png"
 dfi.export(pv_unstkd_lv_style, file, dpi=600, fontsize=12)
 print("Saved figure to: " + file)

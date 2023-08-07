@@ -5,374 +5,104 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ddf1e64-7042-4071-bc93-6d3334c3afb4" name="Changes" comment="synchronous mode and Sentinel.">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/fedstellar-robust.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/single_node/participant_0.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/single_node/participant_0_test_indices.pk" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/single_node/participant_0_train_indices.pk" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/single_node/participant_0_valid_indices.pk" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fedstellar.learning.pytorch.femnist.femnist.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fedstellar.learning.pytorch.femnist.models.cnn.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fedstellar.learning.pytorch.femnist.models.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fedstellar.learning.pytorch.femnist.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/baseline_overview_f1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/baseline_overview_loss.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/baseline_plots.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/archive/wandb_export_2023-07-11_baseline_cifar10_f1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/archive/wandb_export_2023-07-11_baseline_cifar10_loss.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/archive/wandb_export_2023-07-11_baseline_fashionmnist_f1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/archive/wandb_export_2023-07-11_baseline_fashionmnist_loss.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/archive/wandb_export_2023-07-11_baseline_mnist_f1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/archive/wandb_export_2023-07-11_baseline_mnist_loss.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/wandb_export_2023-07-12_baseline_cifar10_f1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/wandb_export_2023-07-12_baseline_cifar10_loss.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/wandb_export_2023-07-12_baseline_fashionmnist_f1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/wandb_export_2023-07-12_baseline_fashionmnist_loss.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/wandb_export_2023-07-12_baseline_mnist_f1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/baseline/data/wandb_export_2023-07-12_baseline_mnist_loss.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/design/maplossdistance.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/design/maplossdistance.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/design/normalization.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/compute_resources.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/compute_resources.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-cifar10-baseline.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-cifar10-lf-targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-cifar10-lf-untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-cifar10-mp.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-cifar10-sp-targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-fashionmnist-baseline.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-fashionmnist-lf-targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-fashionmnist-lf-untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-fashionmnist-mp.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-fashionmnist-sp-targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-mnist-baseline.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-mnist-lf-targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-mnist-lf-untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-mnist-mp.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_fedstellar-mnist-sp-targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/agg_weight_metrics-cifar10_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/agg_weight_metrics-cifar10_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/agg_weight_metrics-cifar10_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/agg_weight_metrics-cifar10_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/avg_loss_metrics-cifar10_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/avg_loss_metrics-cifar10_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/avg_loss_metrics-cifar10_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/avg_loss_metrics-cifar10_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/cos_metrics-cifar10_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/cos_metrics-cifar10_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/cos_metrics-cifar10_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics-cifar10/cos_metrics-cifar10_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/agg_weight_metrics_cifar10_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/agg_weight_metrics_cifar10_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/agg_weight_metrics_cifar10_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/agg_weight_metrics_cifar10_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/agg_weight_metrics_cifar10_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/agg_weight_metrics_cifar10_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/agg_weight_metrics_cifar10_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/agg_weight_metrics_cifar10_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/agg_weight_metrics_cifar10_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/agg_weight_metrics_cifar10_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/avg_loss_metrics_cifar10_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/avg_loss_metrics_cifar10_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/avg_loss_metrics_cifar10_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/avg_loss_metrics_cifar10_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/avg_loss_metrics_cifar10_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/avg_loss_metrics_cifar10_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/avg_loss_metrics_cifar10_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/avg_loss_metrics_cifar10_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/avg_loss_metrics_cifar10_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/avg_loss_metrics_cifar10_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/cos_metrics_cifar10_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/cos_metrics_cifar10_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/cos_metrics_cifar10_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/cos_metrics_cifar10_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/cos_metrics_cifar10_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/cos_metrics_cifar10_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/cos_metrics_cifar10_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/cos_metrics_cifar10_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/cos_metrics_cifar10_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/cos_metrics_cifar10_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/mapped_loss_metrics_cifar10_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/mapped_loss_metrics_cifar10_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/mapped_loss_metrics_cifar10_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/mapped_loss_metrics_cifar10_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/mapped_loss_metrics_cifar10_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/mapped_loss_metrics_cifar10_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/mapped_loss_metrics_cifar10_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/mapped_loss_metrics_cifar10_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/mapped_loss_metrics_cifar10_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/mapped_loss_metrics_cifar10_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_cifar10/val_loss_metrics_cifar10_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/agg_weight_metrics_fmnist_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/agg_weight_metrics_fmnist_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/agg_weight_metrics_fmnist_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/agg_weight_metrics_fmnist_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/agg_weight_metrics_fmnist_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/agg_weight_metrics_fmnist_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/agg_weight_metrics_fmnist_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/agg_weight_metrics_fmnist_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/agg_weight_metrics_fmnist_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/agg_weight_metrics_fmnist_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/avg_loss_metrics_fmnist_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/avg_loss_metrics_fmnist_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/avg_loss_metrics_fmnist_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/avg_loss_metrics_fmnist_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/avg_loss_metrics_fmnist_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/avg_loss_metrics_fmnist_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/avg_loss_metrics_fmnist_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/avg_loss_metrics_fmnist_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/avg_loss_metrics_fmnist_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/avg_loss_metrics_fmnist_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/cos_metrics_fmnist_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/cos_metrics_fmnist_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/cos_metrics_fmnist_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/cos_metrics_fmnist_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/cos_metrics_fmnist_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/cos_metrics_fmnist_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/cos_metrics_fmnist_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/cos_metrics_fmnist_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/cos_metrics_fmnist_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/cos_metrics_fmnist_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/mapped_loss_metrics_fmnist_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/mapped_loss_metrics_fmnist_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/mapped_loss_metrics_fmnist_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/mapped_loss_metrics_fmnist_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/mapped_loss_metrics_fmnist_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/mapped_loss_metrics_fmnist_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/mapped_loss_metrics_fmnist_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/mapped_loss_metrics_fmnist_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/mapped_loss_metrics_fmnist_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_fmnist/mapped_loss_metrics_fmnist_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/agg_weight_metrics_mnist_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/agg_weight_metrics_mnist_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/agg_weight_metrics_mnist_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/agg_weight_metrics_mnist_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/agg_weight_metrics_mnist_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/agg_weight_metrics_mnist_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/agg_weight_metrics_mnist_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/agg_weight_metrics_mnist_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/agg_weight_metrics_mnist_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/agg_weight_metrics_mnist_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/avg_loss_metrics_mnist_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/avg_loss_metrics_mnist_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/avg_loss_metrics_mnist_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/avg_loss_metrics_mnist_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/avg_loss_metrics_mnist_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/avg_loss_metrics_mnist_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/avg_loss_metrics_mnist_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/avg_loss_metrics_mnist_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/avg_loss_metrics_mnist_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/avg_loss_metrics_mnist_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/cos_metrics_mnist_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/cos_metrics_mnist_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/cos_metrics_mnist_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/cos_metrics_mnist_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/cos_metrics_mnist_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/cos_metrics_mnist_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/cos_metrics_mnist_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/cos_metrics_mnist_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/cos_metrics_mnist_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/cos_metrics_mnist_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/mapped_loss_metrics_mnist_50_100_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/mapped_loss_metrics_mnist_50_100_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/mapped_loss_metrics_mnist_50_100_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/mapped_loss_metrics_mnist_50_30_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/mapped_loss_metrics_mnist_50_30_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/mapped_loss_metrics_mnist_50_30_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/mapped_loss_metrics_mnist_50_50_Sentinel_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/mapped_loss_metrics_mnist_50_50_Sentinel_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/mapped_loss_metrics_mnist_50_50_Sentinel_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/mapped_loss_metrics_mnist_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/csv/metrics_mnist/val_loss_metrics_mnist_50_Sentinel_Model_Poisoning.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/metric_analysis_sentinel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel_threshold/fedstellar-cifar10-threshold-eval.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel_threshold/fedstellar-fmnist-threshold-eval.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel_threshold/fedstellar-mnist-threshold-eval.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel_threshold/sentinel_threshold.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_10_100_SentinelGlobal_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_10_30_SentinelGlobal_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_10_50_SentinelGlobal_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_50_100_SentinelGlobal_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_50_30_SentinelGlobal_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_50_50_SentinelGlobal_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_80_100_SentinelGlobal_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_80_30_SentinelGlobal_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_80_50_SentinelGlobal_Label_Flipping_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_10_100_SentinelGlobal_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_10_30_SentinelGlobal_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_10_50_SentinelGlobal_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_50_100_SentinelGlobal_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_50_30_SentinelGlobal_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_50_50_SentinelGlobal_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_80_100_SentinelGlobal_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_80_30_SentinelGlobal_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Label Flipping_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_80_50_SentinelGlobal_Label_Flipping_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Model Poisoning_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_10_SentinelGlobal_Model_Poisoning_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Model Poisoning_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_50_SentinelGlobal_Model_Poisoning_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Model Poisoning_False/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_80_SentinelGlobal_Model_Poisoning_False.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Sample Poisoning_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_10_100_SentinelGlobal_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Sample Poisoning_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_10_30_SentinelGlobal_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Sample Poisoning_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_10_50_SentinelGlobal_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Sample Poisoning_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_50_100_SentinelGlobal_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Sample Poisoning_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_50_30_SentinelGlobal_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Sample Poisoning_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_50_50_SentinelGlobal_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Sample Poisoning_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_80_100_SentinelGlobal_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Sample Poisoning_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_80_30_SentinelGlobal_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/fedstellar-fmnist-sentinelglobal-eval/Sample Poisoning_True/GlobalTrust_fedstellar-fmnist-sentinelglobal-eval_80_50_SentinelGlobal_Sample_Poisoning_True.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/csv/sentinelglobal_numeval.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/sentinelglobal_numeval.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/metrics/sentinelglobal/sentinelglobal_trust.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/notebooks_archive/baseline.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/notebooks_archive/baseline_error.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/notebooks_archive/baseline_overview.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/notebooks_archive/label_flipping_untargeted.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/notebooks_archive/metrics.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/notebooks_archive/model_poison.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/notebooks_archive/sentinelglobal_numeval.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/backdoor/backdoor.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/backdoor/confmat_benign.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/backdoor/confmat_malicious.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/backdoor/trigger.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/archive/fedstellar-mnist-mp.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/archive/wandb_export_2023-06-13T16_13_57.350+02_00.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/archive/wandb_export_2023-06-15_mnist_sp_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/archive/wandb_export_2023-06-15_mp.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/archive/wandb_export_2023-06-27_fmnist_lf-targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/archive/wandb_export_2023-06-27_fmnist_lf-untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/archive/wandb_export_2023-06-30_fmnist_lf-targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/archive/wandb_export_fedstellar_lf_untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/archive/wandb_export_fedstellar_mnist_mp.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/cifar10/label_flipping_targeted/wandb_export_2023-07-12_cifar10_lf_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/cifar10/label_flipping_untargeted/wandb_export_2023-07-12_cifar10_lf_untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/cifar10/model_poison/wandb_export_2023-07-12_cifar10_mp.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/cifar10/sample_poison/wandb_export_2023-07-12_cifar10_sp_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/label_flipping_targeted/archive/wandb_export_2023-06-30_fmnist_lf-targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/label_flipping_targeted/archive/wandb_export_2023-07-12_fmnist_lf_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/label_flipping_targeted/wandb_export_2023-07-12_fmnist_lf_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/label_flipping_untargeted/archive/wandb_export_2023-06-30_fmnist_lf-untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/label_flipping_untargeted/archive/wandb_export_2023-07-12_fmnist_lf_untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/label_flipping_untargeted/wandb_export_2023-07-12_fmnist_lf_untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/model_poison/archive/wandb_export_2023-06-27_fmnist_mp-salt.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/model_poison/wandb_export_2023-07-12_fmnist_mp-salt.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/sample_poison/archive/wandb_export_2023-06-27_fmnist_sp_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/sample_poison/archive/wandb_export_2023-06-29_fmnist_sp_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/sample_poison/archive/wandb_export_2023-07-09_fmnist_sp_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/fmnist/sample_poison/wandb_export_2023-07-12_fmnist_sp_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/label_flipping_targeted/archive/wandb_export_2023-06-28_mnist_lf_untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/label_flipping_targeted/wandb_export_2023-07-12_mnist_lf_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/label_flipping_untargeted/archive/wandb_export_2023-06-14_mnist_lf_untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/label_flipping_untargeted/wandb_export_2023-07-12_mnist_lf_untargeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/model_poison/archive/wandb_export_2023-06-15_mnist_mp_salt.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/model_poison/wandb_export_2023-07-12_mnist_mp_salt.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/sample_poison/archive/wandb_export_2023-06-15_mnist_sp_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/sample_poison/archive/wandb_export_2023-07-09_mnist_sp_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/sample_poison/archive/wandb_export_2023-07-12_mnist_sp_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/sample_poison/wandb_export_2023-07-12_mnist_sp_targeted.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/helper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/lf_confmat/create_confmat.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/lf_confmat/tmp_figures/csv/cm_lf_targeted_SentinelGlobal.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/visualise_data_subplots.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/visualize_data.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/results/visualize_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/evaluation/scripts/css_helper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/attacks/_init_.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/basic_config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/basic_config_chao.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/basic_config_chao2.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/basic_config_noattack.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/config/participant.json.example" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/data/MNIST/raw/t10k-images-idx3-ubyte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/data/MNIST/raw/t10k-images-idx3-ubyte.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/data/MNIST/raw/t10k-labels-idx1-ubyte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/data/MNIST/raw/t10k-labels-idx1-ubyte.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/data/MNIST/raw/train-images-idx3-ubyte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/data/MNIST/raw/train-images-idx3-ubyte.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/data/MNIST/raw/train-labels-idx1-ubyte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/data/MNIST/raw/train-labels-idx1-ubyte.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/directories.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/aggregators/fltrust.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/aggregators/helper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/aggregators/pseudo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/aggregators/sentinel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/aggregators/sentinelglobal.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/modelmetrics.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar100/models/shakeshakenet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/femnist/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/femnist/femnist.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/femnist/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/femnist/models/cnn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/femnist/models/mlp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/femnist/models/resnet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/sent140/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/sent140/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/sent140/models/cnn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/sent140/models/rnn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/sent140/sent140.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/start_without_webserver.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/test_bed.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fedstellar/test_bed_threshold.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/dockerpy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/fltrust_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/gpu_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/nnpack_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/.idea/evaluation.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-cifar10-baseline.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-cifar10-lf-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-cifar10-lf-untargeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-cifar10-mp.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-cifar10-sp-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-fashionmnist-baseline.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-fashionmnist-lf-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-fashionmnist-lf-untargeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-fashionmnist-mp.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-fashionmnist-sp-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-mnist-baseline.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-mnist-lf-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-mnist-lf-untargeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-mnist-mp.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/csv/compute_metrics_range_fedstellar-mnist-sp-targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-cifar10-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-cifar10-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-cifar10-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-cifar10-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-cifar10-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-fashionmnist-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-fashionmnist-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-fashionmnist-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-fashionmnist-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-fashionmnist-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-mnist-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-mnist-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-mnist-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-mnist-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/compute_metrics_fedstellar-mnist-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-cifar10-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-cifar10-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-cifar10-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-cifar10-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-cifar10-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-fashionmnist-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-fashionmnist-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-fashionmnist-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-fashionmnist-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-fashionmnist-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-mnist-baseline.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-mnist-lf-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-mnist-lf-untargeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-mnist-mp.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/fedstellar-mnist-sp-targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-cifar10-baseline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-cifar10-lf-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-cifar10-lf-untargeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-cifar10-mp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-cifar10-sp-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-fashionmnist-baseline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-fashionmnist-lf-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-fashionmnist-lf-untargeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-fashionmnist-mp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-fashionmnist-sp-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-mnist-baseline.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-mnist-lf-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-mnist-lf-untargeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-mnist-mp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/metrics/resources/figures/png/compute_metrics_fedstellar-mnist-sp-targeted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/label_flipping_targeted/wandb_export_2023-08-07_mnist_lf_targeted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_targeted/cifar10_label_flipping_targeted_Test_ASR_targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_targeted/cifar10_label_flipping_targeted_Test_ASR_targeted_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_targeted/fmnist_label_flipping_targeted_Test_ASR_targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_targeted/fmnist_label_flipping_targeted_Test_ASR_targeted_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_targeted/mnist_label_flipping_targeted_Test_ASR_targeted.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_targeted/mnist_label_flipping_targeted_Test_ASR_targeted_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_untargeted/cifar10_label_flipping_untargeted_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_untargeted/cifar10_label_flipping_untargeted_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_untargeted/fmnist_label_flipping_untargeted_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_untargeted/fmnist_label_flipping_untargeted_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_untargeted/mnist_label_flipping_untargeted_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/label_flipping_untargeted/mnist_label_flipping_untargeted_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/model_poison/cifar10_model_poison_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/model_poison/cifar10_model_poison_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/model_poison/fmnist_model_poison_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/model_poison/fmnist_model_poison_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/model_poison/mnist_model_poison_Test_F1Score.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/model_poison/mnist_model_poison_Test_F1Score_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/sample_poison/cifar10_sample_poison_Test_ASR_backdoor.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/sample_poison/cifar10_sample_poison_Test_ASR_backdoor_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/sample_poison/fmnist_sample_poison_Test_ASR_backdoor.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/sample_poison/fmnist_sample_poison_Test_ASR_backdoor_overview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/sample_poison/mnist_sample_poison_Test_ASR_backdoor.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/evaluation/results/figures/sample_poison/mnist_sample_poison_Test_ASR_backdoor_overview.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/attacks/poisoning/datapoison.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/attacks/poisoning/datapoison.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/attacks/poisoning/labelflipping.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/attacks/poisoning/labelflipping.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/attacks/poisoning/modelpoison.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/attacks/poisoning/modelpoison.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/base_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/base_node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/command.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/command.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/communication_protocol.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/communication_protocol.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/aggregators/aggregator.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/aggregators/aggregator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/aggregators/fedavg.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/aggregators/fedavg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/aggregators/krum.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/aggregators/krum.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/aggregators/median.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/aggregators/median.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/aggregators/trimmedmean.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/aggregators/trimmedmean.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/learner.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/learner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/changeablesubset.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/changeablesubset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar10/cifar10.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar10/cifar10.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar10/models/cnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar10/models/cnn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar10/models/fastermobilenet.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar10/models/fastermobilenet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar10/models/resnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar10/models/resnet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar10/models/simplemobilenet.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar10/models/simplemobilenet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar100/models/cnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/cifar100/models/cnn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/datamodule.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/datamodule.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/emnist/models/cnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/emnist/models/cnn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/fashionmnist/fashionmnist.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/fashionmnist/fashionmnist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/fashionmnist/models/cnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/fashionmnist/models/cnn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/fashionmnist/models/mlp.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/fashionmnist/models/mlp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/kitsun/models/mlp.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/kitsun/models/mlp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/lightninglearner.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/lightninglearner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/mnist/mnist.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/mnist/mnist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/mnist/models/cnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/mnist/models/cnn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/mnist/models/mlp.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/mnist/models/mlp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/remotelogger.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/remotelogger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/sentiment140/models/rnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/sentiment140/models/rnn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/syscall/models/mlp.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/syscall/models/mlp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/learning/pytorch/wadi/models/mlp.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/learning/pytorch/wadi/models/mlp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/node.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/node_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/node_connection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/node_start.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/node_start.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/role.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/role.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/single_device.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/single_device.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/webserver/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/webserver/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/webserver/config/participant.json.example" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/webserver/config/participant.json.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fedstellar/webserver/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/fedstellar/webserver/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements-server.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements-server.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation/baseline/baseline_overview_f1.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation/baseline/baseline_overview_f1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation/baseline/baseline_overview_loss.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation/baseline/baseline_overview_loss.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation/metrics/resources/compute_resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation/metrics/resources/compute_resources.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation/metrics/sentinel/metric_analysis_sentinel.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation/metrics/sentinel/metric_analysis_sentinel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation/results/data/mnist/label_flipping_targeted/archive/wandb_export_2023-06-28_mnist_lf_untargeted.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation/results/data/mnist/label_flipping_targeted/wandb_export_2023-07-12_mnist_lf_targeted.csv" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation/results/data/mnist/label_flipping_targeted/archive/wandb_export_2023-07-12_mnist_lf_targeted.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation/results/visualise_data_subplots.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation/results/visualise_data_subplots.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -416,31 +146,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging sync",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/janos.LAPTOP-42CLK60G/Repos/fedstellar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "configurable.group.project",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/janos.LAPTOP-42CLK60G/Repos/fedstellar-sync/evaluation&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python",
-      "JSON"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;,
+      &quot;JSON&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\janos.LAPTOP-42CLK60G\Repos\fedstellar-robust\fedstellar" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\janos.LAPTOP-42CLK60G\Repos\fedstellar-sync\evaluation\results\data\mnist\label_flipping_targeted\archive" />
+      <recent name="C:\Users\janos.LAPTOP-42CLK60G\Repos\fedstellar-sync\evaluation\results\data\mnist\label_flipping_targeted" />
       <recent name="C:\Users\janos.LAPTOP-42CLK60G\Repos\fedstellar-robust\evaluation\results" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -486,7 +219,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\janos.LAPTOP-42CLK60G\anaconda3\envs\fedstellar\python.exe" />
-      <option name="SDK_NAME" value="fedstellar (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -553,7 +285,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\janos.LAPTOP-42CLK60G\anaconda3\envs\fedstellar\python.exe" />
-      <option name="SDK_NAME" value="fedstellar (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/fedstellar" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -586,7 +317,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\janos.LAPTOP-42CLK60G\anaconda3\envs\fedstellar\python.exe" />
-      <option name="SDK_NAME" value="fedstellar (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/fedstellar" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -714,6 +444,8 @@
       <workItem from="1690289247760" duration="10169000" />
       <workItem from="1690813659865" duration="12641000" />
       <workItem from="1691138597567" duration="12765000" />
+      <workItem from="1691401682131" duration="1062000" />
+      <workItem from="1691406149985" duration="642000" />
     </task>
     <task id="LOCAL-00001" summary="improve sentinel logging.">
       <created>1686928247370</created>
